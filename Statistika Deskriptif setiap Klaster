@@ -1,0 +1,28 @@
+Hasil_klaster = df.assign(Klaster=points)
+Hasil_klaster
+Hasil_klaster2=Hasil_klaster.iloc[:, [1,10]]
+Hasil_klaster2
+Hasil_klaster2.to_excel(r'C:\Users\User\Downloads\Hasil Klaster.xlsx', index=False)
+
+Klaster2=Hasil_klaster2.groupby('Klaster').count()
+Klaster2
+
+Klasters.get_group(0)
+Klasters.get_group(1)
+Klasters.get_group(2)
+Klasters.get_group(3)
+Klasters.get_group(4)
+Klasters.get_group(5)
+
+df3 = df2.assign(Klaster=points)
+median=df3.groupby('Klaster').median()
+median
+
+mean=df3.groupby('Klaster').mean()
+mean
+
+maximal=df3.groupby('Klaster').max()
+maximal
+
+minimal=df3.groupby('Klaster').min()
+minimal
