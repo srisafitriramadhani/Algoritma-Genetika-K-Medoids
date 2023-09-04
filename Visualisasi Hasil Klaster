@@ -1,0 +1,28 @@
+library(readxl)
+library(factoextra)
+library(ggpubr)
+m_f_p_Jan_ <- read_excel("C:/Users/User/OneDrive - UNIVERSITAS INDONESIA/SKRIPSI/m+f+p (Jan).xlsx")
+Klaster <- read_excel("C:/Users/User/Downloads/Klaster.xlsx")
+trains<-m_f_p_Jan_
+df<-trains[3:10]
+
+pca_df<-prcomp(df)
+
+ind.coord <- as.data.frame(get_pca_ind(pca_df)$coord)
+ind.coord$cluster <- factor(Klaster$Klaster)
+eigenvalue <- round(get_eigenvalue(pca_df), 1)
+variance.percent <- eigenvalue$variance.percent
+Visual<-ggscatter(
+  ind.coord, x = "Dim.1", y = "Dim.2", 
+  color = "cluster", palette = "npg", ellipse = TRUE, ellipse.type = "convex",
+  size = 1.5,  legend = "right", ggtheme = theme_bw(),
+  xlab = paste0("Dim 1 (", variance.percent[1], "% )" ),
+  ylab = paste0("Dim 2 (", variance.percent[2], "% )" )
+) +
+  stat_mean(aes(color = cluster), size = 4)
+
+visualplot <- Visual +        
+  theme(rect = element_rect(fill = "transparent"))
+ggsave(visualplot ,           
+       filename = "KlasterPlot.png",
+       bg = "transparent")
