@@ -1,0 +1,17 @@
+library(readxl)
+library(ggpubr)
+Hasil_Klaster <- read_excel("C:/Users/User/Downloads/Hasil Klaster.xlsx")
+
+biplot<-fviz_pca_biplot(pca_df,
+                label="var",
+                habillage = ind.coord$cluster,
+                addEllipses = TRUE,
+                col.var = "black",
+                legend.title="Klaster",
+                labelsize=4)
+
+visualplot <- biplot +        
+  theme(rect = element_rect(fill = "transparent"))
+ggsave(visualplot ,            
+       filename = "Biplot.png",
+       bg = "transparent")
