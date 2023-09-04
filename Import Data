@@ -1,0 +1,4 @@
+df = pd.read_excel("m+f+p (Jan).xlsx")
+print(df)
+df2=df.iloc[:, 2:10]
+df2
