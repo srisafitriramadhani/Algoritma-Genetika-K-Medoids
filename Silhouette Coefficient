@@ -1,0 +1,13 @@
+range_n_clusters = list(range(2, 84))
+silhouette_avg = []
+for num_clusters in range_n_clusters:
+    kmedoid = KMedoids(n_clusters=num_clusters).fit(principalDF)
+    cluster_labels = kmedoid.labels_
+    silhouette_avg.append(silhouette_score(principalDF, cluster_labels))
+    
+plt.plot(range_n_clusters,silhouette_avg)    
+plt.xlabel("Values of K") 
+plt.ylabel("Silhouette score") 
+plt.title("Silhouette analysis For Optimal k")
+savefig(r'C:\Users\User\Downloads\Silhouette.png', transparent=True)
+plt.show()
