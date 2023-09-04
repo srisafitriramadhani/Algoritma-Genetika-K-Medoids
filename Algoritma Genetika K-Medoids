@@ -1,0 +1,86 @@
+#ALGORITMA GENETIKA K-MEDOIDS
+#Inisialisasi Jumlah klaster dan Data
+k=6
+data=principalDF
+
+#Fungsi Fitness
+def kmedoids(solution, solutionIndex):
+    global data, k
+    medoids = np.array(solution).reshape(k, len(solution) // k)
+    distances = cdist(data, medoids, 'euclidean')
+    points = np.array([np.argmin(i) for i in distances])
+    error = []
+    for idx in np.unique(points):
+        temp_cent = data[points == idx]
+        distances = cdist(temp_cent, medoids[idx].reshape(1, -1), 'euclidean')
+        error.append(distances.sum())
+    return np.sum(error)
+
+def fitnessFunction(self,solution, solutionIndex):
+    hasil = kmedoids(solution, solutionIndex)
+    fitnessValue = 1 / (hasil + 0.000001)
+    return fitnessValue
+
+#Inisialisasi parameter
+numberGeneration = 500   
+numberParentsMating = 2
+solutionPerPopulation = 100     
+parents = -1
+numberGenes = k * data.shape[1]   
+geneType = float              
+minValue = (data.min()).min()         
+maxValue = (data.max()).max()          
+selectionType = 'rws'    
+crossoverType = 'single_point'
+crossoverRate = 0.8 
+mutationType = 'random'       
+mutationReplacement = True    
+mutationMin = (data.min()).min()
+mutationMax = (data.max()).max()
+mutationRate = 0.02
+
+
+#Algoritma genetika
+geneticAlgorithm = pygad.GA(
+    num_generations = numberGeneration,
+    num_parents_mating = numberParentsMating,
+    num_genes = numberGenes,
+    gene_type = geneType,
+    fitness_func = fitnessFunction,
+    sol_per_pop = solutionPerPopulation,
+    init_range_low = minValue,
+    init_range_high = maxValue,
+    parent_selection_type = selectionType,
+    keep_parents = parents,
+    crossover_type = crossoverType,
+    crossover_probability = crossoverRate,
+    mutation_type = mutationType,
+    mutation_by_replacement = mutationReplacement,
+    random_mutation_min_val = mutationMin,
+    random_mutation_max_val = mutationMax,
+    mutation_percent_genes = mutationRate,
+    stop_criteria=["saturate_100"],
+    save_solutions = True,
+    keep_elitism=10,
+  save_best_solutions = True,
+    suppress_warnings = True
+)
+
+#Runnning
+geneticAlgorithm.run()
+
+#Menyimpan solusi terbaik
+solution, solutionFitness, solutionIndex = geneticAlgorithm.best_solution()
+print('Pusat Medoids: \n{solution}'.format(
+    solution = solution.reshape(k, len(solution) // k)
+    )
+)
+print('Nilai Fitness Terbaik: {solutionFit}'.format(
+    solutionFit = round(solutionFitness, ndigits = 11)
+    )
+)
+print("Solusi terbaik ada pada generasi ke-{gen}".format(gen=geneticAlgorithm.best_solution_generation))
+
+medoids = solution.reshape(k, len(solution) // k)
+distances = cdist(data, medoids, 'euclidean')
+points = np.array([np.argmin(i) for i in distances])
