@@ -1,0 +1,11 @@
+#UJI ASUMSI
+#Keterwakilan Sampel
+kmo_model = calculate_kmo(df2)
+kmo_model
+#Multikolinearitas
+chi_square_value,p_value=calculate_bartlett_sphericity(df2)
+print(chi_square_value, p_value)
+#Heatmap
+heatmap=sns.heatmap(df2.corr(),cmap="YlGnBu", annot=True,alpha=0.5)
+savefig(r'C:\Users\User\Downloads\scatterplot.png')
+plt.show()
