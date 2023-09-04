@@ -1,0 +1,32 @@
+sns.boxplot(data=Hasil_klaster, x="Klaster", y='Mobile Download',palette="bright",boxprops=dict(alpha=.5))
+savefig(r'C:\Users\User\Downloads\MD.png', transparent=True)
+plt.show()
+
+sns.boxplot(data=Hasil_klaster, x="Klaster", y='Fixed Download',palette="bright",boxprops=dict(alpha=.5))
+savefig(r'C:\Users\User\Downloads\FD.png', transparent=True)
+plt.show()
+
+sns.boxplot(data=Hasil_klaster, x="Klaster", y='Mobile Upload',palette="bright",boxprops=dict(alpha=.5))
+savefig(r'C:\Users\User\Downloads\MU.png', transparent=True)
+plt.show()
+
+sns.boxplot(data=Hasil_klaster, x="Klaster", y='Fixed Upload',palette="bright",boxprops=dict(alpha=.5))
+savefig(r'C:\Users\User\Downloads\FU.png', transparent=True)
+plt.show()
+
+sns.boxplot(data=Hasil_klaster, x="Klaster", y='Mobile Latency',palette="bright",boxprops=dict(alpha=.5))
+savefig(r'C:\Users\User\Downloads\ML.png', transparent=True)
+plt.show()
+
+sns.boxplot(data=Hasil_klaster, x="Klaster", y='Fixed Latency',palette="bright",boxprops=dict(alpha=.5))
+savefig(r'C:\Users\User\Downloads\FL.png', transparent=True)
+plt.show()
+
+
+sns.boxplot(data=Hasil_klaster, x="Klaster", y='Mobile Provider',palette="bright",boxprops=dict(alpha=.5))
+savefig(r'C:\Users\User\Downloads\MP.png', transparent=True)
+plt.show()
+
+sns.boxplot(data=Hasil_klaster, x="Klaster", y='Fixed Provider',palette="bright",boxprops=dict(alpha=.5))
+savefig(r'C:\Users\User\Downloads\FP.png', transparent=True)
+plt.show()
